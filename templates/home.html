@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Insurance Charges</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .login {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .results {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .results h2 {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login">
+            <h1>Medical Insurance Charges Prediction</h1>
+
+            <!-- Form for user input -->
+            <form action="{{ url_for('predict_charges') }}" method="POST">
+                <!-- Age input -->
+                <label for="age">Age:</label>
+                <input type="text" name="age" id="age" placeholder="Enter age" required>
+
+                <!-- Sex input (0 = Female, 1 = Male) -->
+                <label for="sex">Sex (0 = Female, 1 = Male):</label>
+                <input type="text" name="sex" id="sex" placeholder="Enter sex" required>
+
+                <!-- BMI input -->
+                <label for="bmi">BMI:</label>
+                <input type="text" step="0.1" name="bmi" id="bmi" placeholder="Enter BMI" required>
+
+                <!-- Children input -->
+                <label for="children">Children:</label>
+                <input type="text" name="children" id="children" placeholder="Enter number of children" required>
+
+                <!-- Smoker input (0 = Non-smoker, 1 = Smoker) -->
+                <label for="smoker">Smoker (0 = No, 1 = Yes):</label>
+                <input type="text" name="smoker" id="smoker" placeholder="Enter 0 or 1" required>
+
+                <!-- Region inputs (One-hot encoded) -->
+                <label for="region_northeast">Region Northeast (0 = No, 1 = Yes):</label>
+                <input type="text" name="region_northeast" id="region_northeast" placeholder="Enter 0 or 1" required>
+
+                <label for="region_northwest">Region Northwest (0 = No, 1 = Yes):</label>
+                <input type="text" name="region_northwest" id="region_northwest" placeholder="Enter 0 or 1" required>
+
+                <label for="region_southeast">Region Southeast (0 = No, 1 = Yes):</label>
+                <input type="text" name="region_southeast" id="region_southeast" placeholder="Enter 0 or 1" required>
+
+                <label for="region_southwest">Region Southwest (0 = No, 1 = Yes):</label>
+                <input type="text" name="region_southwest" id="region_southwest" placeholder="Enter 0 or 1" required>
+
+                <!-- Submit button -->
+                <button type="submit">Predict Charges</button>
+            </form>
+        </div>
+
+        <!-- Display prediction result -->
+        <div class="results">
+            {% if results %}
+            <h2>
+                The predicted medical charges are: {{ results }}
+            </h2>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

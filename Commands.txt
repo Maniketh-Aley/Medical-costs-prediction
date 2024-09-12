@@ -1,0 +1,4 @@
+URL for executing the flask application. anyways it might differ for other machines, check the readme.md file.
+
+https://brown-scientist-pcxdi.pwskills.app:8080/Predictdata
+
